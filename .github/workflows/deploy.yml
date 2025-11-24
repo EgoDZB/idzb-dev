@@ -1,0 +1,21 @@
+name: Deploy to Coolify
+
+on:
+  push:
+    tags:
+      - '*'
+  release:
+    types: [published]
+
+jobs:
+  deploy:
+    name: Trigger Coolify Deployment
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Call Coolify Webhook
+        run: |
+          curl -X GET "${{ secrets.COOLIFY_WEBHOOK_URL }}"
+
+      - name: Deployment Triggered
+        run: echo "Coolify deployment webhook called successfully"
