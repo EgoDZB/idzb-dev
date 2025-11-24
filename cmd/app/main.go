@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"log"
 	"net/http"
 	"os"
@@ -24,9 +23,13 @@ func main() {
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
 
+	//r.Get("/", func(w http.ResponseWriter, r *http.Request) {
+	//	w.Header().Set("Content-Type", "application/json")
+	//	json.NewEncoder(w).Encode(map[string]string{"status": "ok"})
+	//})
+
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "application/json")
-		json.NewEncoder(w).Encode(map[string]string{"status": "ok"})
+		http.Redirect(w, r, "https://www.linkedin.com/in/egodzb", http.StatusFound)
 	})
 
 	fileServer := http.FileServer(http.Dir("./static"))
