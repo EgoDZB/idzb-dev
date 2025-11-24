@@ -2,6 +2,8 @@ name: Deploy to Coolify
 
 on:
   push:
+    branches:
+      - main
     tags:
       - '*'
   release:
