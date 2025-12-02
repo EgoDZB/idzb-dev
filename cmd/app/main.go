@@ -43,5 +43,8 @@ func main() {
 	r.Handle("/*", fileServer)
 
 	log.Printf("Server starting on port %s", port)
-	http.ListenAndServe(":"+port, r)
+	err := http.ListenAndServe(":"+port, r)
+	if err != nil {
+		return
+	}
 }
