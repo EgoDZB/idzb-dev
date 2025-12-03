@@ -27,7 +27,12 @@ func main() {
 	r.Get("/health", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
-		json.NewEncoder(w).Encode(map[string]string{"status": "ok"})
+		err := json.NewEncoder(w).Encode(map[string]string{"status": "ok"})
+
+		if err != nil {
+			log.Printf("Error encoding health check response: %v", err)
+			return
+		}
 	})
 
 	//r.Get("/", func(w http.ResponseWriter, r *http.Request) {
@@ -43,8 +48,11 @@ func main() {
 	r.Handle("/*", fileServer)
 
 	log.Printf("Server starting on port %s", port)
+
 	err := http.ListenAndServe(":"+port, r)
+
 	if err != nil {
+		log.Printf("Error starting server: %v", err)
 		return
 	}
 }
