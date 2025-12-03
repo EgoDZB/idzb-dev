@@ -59,7 +59,7 @@ tidy:
 
 docker-build:
 	@echo "Building Docker image..."
-	@docker build -t $(DOCKER_IMAGE):$(DOCKER_TAG) .
+	@docker build --progress=plain --no-cache -t $(DOCKER_IMAGE):$(DOCKER_TAG) .
 	@echo "Docker image built: $(DOCKER_IMAGE):$(DOCKER_TAG)"
 
 docker-run:

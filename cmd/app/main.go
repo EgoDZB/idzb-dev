@@ -35,11 +35,6 @@ func main() {
 		}
 	})
 
-	//r.Get("/", func(w http.ResponseWriter, r *http.Request) {
-	//	w.Header().Set("Content-Type", "application/json")
-	//	json.NewEncoder(w).Encode(map[string]string{"status": "ok"})
-	//})
-
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "https://www.linkedin.com/in/egodzb", http.StatusFound)
 	})
